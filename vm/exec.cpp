@@ -25,8 +25,8 @@ void Execute(int source[], int lenght){
                 sub(&Sreg,&Areg,source[++i],source[++i]);
                 break;
             case 8:
-                i = source[++i];
+                i = source[++i] -1;
                 break;
         }
     }
-}
+} 
