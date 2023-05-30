@@ -9,9 +9,23 @@ class Program{
     }
     public static void Main(string[] args){
         List<byte> bytes = new();
-        string filename = "../program.sasm";
+        if(args.Length < 1){
+            Console.WriteLine("No file selected!");
+            Environment.Exit(-1);
+        }
+        string filename = args[0];
+        string output = "program.bin";
+        if(args.Length > 1){
+            output = args[1];
+        }
+        if(!File.Exists(filename)){
+            Console.WriteLine("File does not exist!");
+            Environment.Exit(-1);
+        }
         string[] lines = File.ReadAllLines(filename);
         foreach(string line in lines){
+            if(line == String.Empty)
+                continue;
             string[] parts = line.Split(' ');
             switch(parts[0]){
                 case "mov":
@@ -47,11 +61,14 @@ class Program{
                     bytes.Add(8);
                     bytes.Add(ConvertHex(parts[1]));
                     break;
+                case "dw":
+                    bytes.Add(ConvertHex(parts[1]));
+                    break;
                 default:
                     bytes.Add(0);
                     break;
             }
-            FileStream fs = File.OpenWrite("../program.bin");
+            FileStream fs = File.OpenWrite(output);
             fs.Write(bytes.ToArray(),0,bytes.Count);
             fs.Close();
         }

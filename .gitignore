@@ -1,3 +1,4 @@
 .vscode/
 asm/bin
 asm/obj
+vm/a.out

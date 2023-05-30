@@ -7,3 +7,6 @@ cpy 0x0A 6
 cpy 7 0
 
 print
+
+dw 0x00
+dw 0x00
