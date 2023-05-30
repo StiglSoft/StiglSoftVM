@@ -25,8 +25,30 @@ void Execute(int source[], int lenght){
                 sub(&Sreg,&Areg,source[++i],source[++i]);
                 break;
             case 8:
+                mul(&Sreg,&Areg,source[++i],source[++i]);
+                break;
+            case 9:
+                div(&Sreg,&Areg,source[++i],source[++i]);
+                break;
+            case 10:
                 i = source[++i] -1;
                 break;
+            case 11:
+                cmp(Sreg,&Sreg[0],source[++i]);
+                break;
+            case 12:
+                if(je(Sreg[0]))
+                    i = source[++i] -1;
+                break;
+            case 13:
+                if(jne(Sreg[0]))
+                    i = source[++i] -1;
+                break;
+            case 14:
+                if(jnz(Sreg[0]))
+                    i = source[++i] -1;
+                break;
+            
         }
     }
 } 

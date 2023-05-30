@@ -10,13 +10,15 @@ void exit(int ec){
 int get(){
    return getchar();
 }
-int cmp(int reg[], int* reg0, int src){
+void cmp(int (reg)[], int* reg0, int src){
     if(reg[1] == reg[src])
         *reg0 = 0;
     else if(reg[1] < reg[src])
         *reg0 = -1;
     else if(reg[1] > reg[src])
         *reg0 = 1;
+    else if(reg[1] == 0)
+        *reg0 = 2;
 }
 void mov(int(*reg)[], int(* Areg)[], int src, int dest){
     int cr;
@@ -50,4 +52,37 @@ void sub(int (*reg)[], int(*Areg)[], int src, int us){
     if(src < 128)
         (*reg)[src] = (*reg)[src] - cr;
     else (*Areg)[src] = (*Areg)[src] - cr;
+}
+void mul(int (*reg)[], int(*Areg)[], int src, int us){
+    int cr;
+    if(us < 128)
+        cr = (*reg)[us];
+    else cr = (*Areg)[us-128];
+    if(src < 128)
+        (*reg)[src] = (*reg)[src] * cr;
+    else (*Areg)[src] = (*Areg)[src] * cr;
+}
+void div(int (*reg)[], int(*Areg)[], int src, int us){
+    int cr;
+    if(us < 128)
+        cr = (*reg)[us];
+    else cr = (*Areg)[us-128];
+    if(src < 128)
+        (*reg)[src] = (*reg)[src] / cr;
+    else (*Areg)[src] = (*Areg)[src] / cr;
+}
+int je(int reg0){
+    if(reg0 == 0){
+        return 1;
+    }return 0;
+}
+int jne(int reg0){
+    if(reg0 == 0){
+        return 0;
+    }return 1;
+}
+int jnz(int reg0){
+    if(reg0 == 2){
+        return 1;
+    }return 0;
 }
