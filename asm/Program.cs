@@ -76,6 +76,27 @@ class Program{
                     bytes.Add(12);
                     bytes.Add(ConvertHex(parts[1]));
                     break;
+                case "cli":
+                    bytes.Add(15);
+                    break;
+                case "sti":
+                    bytes.Add(16);
+                    break;
+                case "mjp":
+                    bytes.Add(17);
+                    break;
+                case "pop":
+                    bytes.Add(18);
+                    bytes.Add(2);
+                    break;
+                case "push":
+                    bytes.Add(18);
+                    bytes.Add(3);
+                    break;
+                case "peek":
+                    bytes.Add(18);
+                    bytes.Add(1);
+                    break;
                 default:
                     bytes.Add(0);
                     break;
