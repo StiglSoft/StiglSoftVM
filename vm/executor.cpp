@@ -7,7 +7,6 @@ int main(int argc, char *argv[]){
         unsigned char byte = bytes[i];
         //std::cout << 
         a[i] = static_cast<int>(byte);
-        
     }
     Execute(a,bytes.size());
 }

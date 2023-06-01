@@ -1,7 +1,13 @@
 #include "registers.h"
 #include "instructions.cpp"
+int ExecutionDisabled = 0;
 void Execute(int source[], int lenght){
     for(int i =0; i < lenght;i++){
+        if(ExecutionDisabled){
+            if(source[i] == 16)
+                ExecutionDisabled = 0;
+            continue;
+        }
         switch(source[i]){
             case 1: 
                 mov(&Sreg,&Areg,source[++i],source[++i]);
@@ -45,8 +51,14 @@ void Execute(int source[], int lenght){
                     i = source[++i] -1;
                 break;
             case 14:
+                //If cmpeq != 0 then jump
                 if(jnz(Sreg[0]))
                     i = source[++i] -1;
+                break;
+            case 15:
+                //Enables on the NOCODE mode
+                //16 Disables!
+                ExecutionDisabled = 1;
                 break;
             
         }

@@ -35,7 +35,7 @@ void cpy(int(*reg)[], int(*Areg)[], int dest, int src){
         (*reg)[dest] = src;
     else (*Areg)[dest-128] = src;
 }
-void add(int (*reg)[], int(*Areg)[], int src, int us){
+void add(int (*reg)[], int(*Areg)[], int us, int src){
     int cr;
     if(us < 128)
         cr = (*reg)[us];

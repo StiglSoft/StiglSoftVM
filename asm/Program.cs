@@ -24,7 +24,7 @@ class Program{
         }
         string[] lines = File.ReadAllLines(filename);
         foreach(string line in lines){
-            if(line == String.Empty)
+            if(line == String.Empty || line[0] == ';')
                 continue;
             string[] parts = line.Split(' ');
             switch(parts[0]){
@@ -62,6 +62,18 @@ class Program{
                     bytes.Add(ConvertHex(parts[1]));
                     break;
                 case "dw":
+                    bytes.Add(ConvertHex(parts[1]));
+                    break;
+                case "jnz":
+                    bytes.Add(14);
+                    bytes.Add(ConvertHex(parts[1]));
+                    break;
+                case "jne":
+                    bytes.Add(13);
+                    bytes.Add(ConvertHex(parts[1]));
+                    break;
+                case "je":
+                    bytes.Add(12);
                     bytes.Add(ConvertHex(parts[1]));
                     break;
                 default:
