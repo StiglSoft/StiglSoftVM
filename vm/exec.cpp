@@ -2,7 +2,11 @@
 #include "instructions.cpp"
 int ExecutionDisabled = 0;
 
-void Execute(int source[], int lenght){
+void Execute(int sources[], int lenght){
+    int source[lenght];
+    for(int i =0; i < lenght;i++){
+        source[i] = sources[i];
+    }
     for(int i =0; i < lenght;i++){
         if(ExecutionDisabled){
             if(source[i] == 16)
@@ -18,7 +22,7 @@ void Execute(int source[], int lenght){
                 cpy(&Sreg,&Areg,source[++i],source[++i]);
                 break;
             case 3:
-                exit(Sreg[0]);
+                return;
                 break;
             case 4:
                 print(Sreg);
@@ -76,7 +80,33 @@ void Execute(int source[], int lenght){
                     case 3:
                         Stack1.push(Sreg[0]);
                         break;
+                    case 4:
+                        Sreg[0] = Stack1.top();
+                        Stack1.pop();
+                        break;
+                    case 5:
+                        Stack1.push(i-1);
+                        break;
                 }break;
+            case 19:    
+                if(jb(Sreg[0]))
+                    i = source[++i] -1;
+                break;
+            case 20:
+                if(js(Sreg[0])) 
+                    i = source[++i] -1;
+                break;
+            case 21:
+                interpret(&Sreg, &source, i);
+                break;
+            case 22:
+                //std::cout << Sreg[32];
+                std::cout << i;//Sreg[24];
+                //std::cout << Sreg[32] << std::endl;
+                //for(int i =0; i < 16;i++){
+                //    std::cout << source[i] << std::endl;
+                //}
+                break;
         }
     }
 } 
