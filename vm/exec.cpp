@@ -100,12 +100,31 @@ void Execute(int sources[], int lenght){
                 interpret(&Sreg, &source, i);
                 break;
             case 22:
-                //std::cout << Sreg[32];
-                std::cout << i;//Sreg[24];
-                //std::cout << Sreg[32] << std::endl;
-                //for(int i =0; i < 16;i++){
-                //    std::cout << source[i] << std::endl;
-                //}
+                int j = 0;
+                std::string hexDigits = "0123456789ABCDEF";
+                std::cout <<  "\033[36m" <<"Hex dump of registers:" << "\033[37m" << std::endl;
+                for(int i =0; i < 128;i++){
+                    std::string hexString;
+                    hexString += hexDigits[Sreg[i] / 16];
+                    hexString += hexDigits[Sreg[i] % 16];
+                    if(hexString != "00"){
+                        std::cout << "\033[33m";
+                    }std::cout << hexString << " " << "\033[37m";
+                    j++;
+                    if(j % 8 == 0)
+                        std::cout << std::endl;
+                }std::cout << std::endl << "\033[36m" << "Hex dump of code:" << "\033[37m" << std::endl;
+                for(int i =0; i < lenght;i++){
+                    std::string hexString;
+                    hexString += hexDigits[source[i] / 16];
+                    hexString += hexDigits[source[i] % 16];
+                    if(hexString != "00"){
+                        std::cout << "\033[33m";
+                    }std::cout << hexString << " " << "\033[37m";
+                    j++;
+                    if(j % 8 == 0 && j > 0)
+                        std::cout << std::endl;
+                }std::cout << std::endl;
                 break;
         }
     }

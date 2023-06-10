@@ -82,7 +82,7 @@ class Program{
                 case "sti":
                     bytes.Add(16);
                     break;
-                case "mjp":
+                case "mjmp":
                     bytes.Add(17);
                     break;
                 case "pop":
@@ -96,6 +96,16 @@ class Program{
                 case "peek":
                     bytes.Add(18);
                     bytes.Add(1);
+                    break;
+                case "jpoint":
+                    bytes.Add(18);
+                    bytes.Add(5);
+                    break;
+                case "int":
+                    bytes.Add(21);
+                    break;
+                case "memdump":
+                    bytes.Add(22);
                     break;
                 default:
                     bytes.Add(0);
